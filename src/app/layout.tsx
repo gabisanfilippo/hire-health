@@ -17,9 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={montserrat.className}>
+      <body className={`${montserrat.className} relative`}>
         <HeaderApp />
-        <main className="max-w-screen-xl m-auto">{children}</main>
+        {children}
       </body>
     </html>
   );

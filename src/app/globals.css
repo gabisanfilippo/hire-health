@@ -16,5 +16,12 @@ body {
   padding: 0;
   text-decoration: none;
   color: var(--black);
-  padding: 0 1rem 3rem 1rem;
+  padding-bottom: 5rem;
+  min-height: 100vh;
+}
+
+main{
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
 }
