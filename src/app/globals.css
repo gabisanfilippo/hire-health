@@ -31,3 +31,11 @@ main{
   max-width: 1280px;
   margin: auto;
 }
+
+button{
+  cursor: pointer;
+  &:hover{
+    opacity: 0.8;
+    scale: 1.1;
+  }
+}
