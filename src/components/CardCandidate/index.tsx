@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export const CardCandidate = () => {
   return (
-    <li className="bg-white drop-shadow p-4 sm:pl-8 border-none rounded-md grid lg:grid-cols-10 md:grid-cols-12 grid-cols-10 items-center md:gap-4 gap-2">
-      <div className="flex items-center gap-2 lg:col-span-3 order-1 md:col-span-10 col-span-8">
+    <li className="bg-white drop-shadow p-4 sm:pl-8 border-none rounded-md grid lg:grid-cols-10 md:grid-cols-12 grid-cols-10 items-center md:gap-4 gap-2 lg:gap-y-0">
+      <div className="flex items-center gap-2 lg:col-span-3 order-1 md:col-span-10 col-span-8 h-full">
         <Image
           alt=""
           src={
