@@ -1,4 +1,4 @@
-import { IconLogo, IconProfile } from "@/assets/icons";
+import { IconLogo, IconProfileDefault } from "@/assets/icons";
 
 export const HeaderApp = () => {
   return (
@@ -9,7 +9,7 @@ export const HeaderApp = () => {
           Hire Health
         </h1>
       </div>
-      <IconProfile />
+      <IconProfileDefault />
     </header>
   );
 };
