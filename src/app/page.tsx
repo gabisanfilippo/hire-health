@@ -1,6 +1,6 @@
-import { Button } from "@/components/Button";
-import { CardCandidate } from "@/components/CardCandidate";
-import { ColumnsName } from "@/components/ColumnsName";
+import { Button } from "@/components/UI/Button";
+import { CardCandidate } from "@/components/pages/CardCandidate";
+import { ColumnsName } from "@/components/pages/ColumnsName";
 import Link from "next/link";
 
 export default function Home() {

@@ -1,14 +1,14 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Input } from "../Input";
+import { Input } from "../../UI/Input";
 import { RegisterSchema } from "./schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { fieldsList } from "./data";
 import { HTMLInputTypeAttribute } from "react";
-import { Button } from "../Button";
-import { UploadPhoto } from "../UploadPhoto";
-import { Select } from "../Select";
+import { Button } from "../../UI/Button";
+import { UploadPhoto } from "../../UI/UploadPhoto";
+import { Select } from "../../UI/Select";
 import { IFieldsList, RegisterInputs } from "@/types/registerForm";
 
 const INPUT_TYPE: HTMLInputTypeAttribute[] = ["date", "text", "number"];
