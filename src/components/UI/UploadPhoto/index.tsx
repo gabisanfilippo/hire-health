@@ -1,5 +1,5 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import { RegisterInputs } from "../../pages/FormRegister/schema";
+import { RegisterInputs } from "@/types/registerForm";
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { IconProfile } from "@/assets/icons";
