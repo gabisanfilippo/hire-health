@@ -1,4 +1,4 @@
-import { RegisterInputs } from "../../pages/FormRegister/schema";
+import { RegisterInputs } from "@/types/registerForm";
 import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 

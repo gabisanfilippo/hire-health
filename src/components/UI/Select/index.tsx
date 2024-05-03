@@ -1,5 +1,5 @@
-import { RegisterInputs } from "../../pages/FormRegister/schema";
-import { ChangeEvent, HTMLInputTypeAttribute } from "react";
+import { RegisterInputs } from "@/types/registerForm";
+import { ChangeEvent } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 type IProps = {
