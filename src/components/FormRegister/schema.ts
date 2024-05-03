@@ -1,24 +1,5 @@
 import * as Yup from "yup";
 
-export type RegisterInputs = {
-  photo: File;
-  name: string;
-  birth: string;
-  cpf: string;
-  rg: string;
-  email?: string;
-  phone?: string;
-  zipCode: string;
-  address: string;
-  addressNumber: string;
-  addressComplement?: string;
-  specialty: string;
-  specialtyRegistration: string;
-  serviceOption: string;
-  serviceRegion: string;
-  consultationValue: string;
-};
-
 const stringMinRequiredSchema = Yup.string()
   .required("*Este campo é obrigatório")
   .min(3, "*Mínimo 3 caracteres");

@@ -1,17 +1,9 @@
-import { HTMLInputTypeAttribute } from "react";
-import { RegisterInputs } from "./schema";
+import { IFieldsList } from "@/types/registerForm";
 import { maskCPF } from "@/utils/maskCPF";
 import { maskPhone } from "@/utils/maskPhone";
 import { maskZipCode } from "@/utils/maskZipCode";
 import { maskNumber } from "@/utils/maskNumber";
 import { maskCurrency } from "@/utils/maskCurrency";
-
-export interface IFieldsList {
-  name: keyof RegisterInputs;
-  label: string;
-  type: HTMLInputTypeAttribute | "select";
-  mask?: (value: string) => string;
-}
 
 export const fieldsList: IFieldsList[] = [
   {
