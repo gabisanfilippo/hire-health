@@ -5,11 +5,12 @@ import { Input } from "../../UI/Input";
 import { RegisterSchema } from "./schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { fieldsList } from "./data";
-import { HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute, useEffect, useMemo } from "react";
 import { Button } from "../../UI/Button";
 import { UploadPhoto } from "../../UI/UploadPhoto";
 import { Select } from "../../UI/Select";
 import { IFieldsList, RegisterInputs } from "@/types/registerForm";
+import { useGetAddressByZipCode } from "@/hooks/ViaCep/useGetAddressByZipCode";
 
 const INPUT_TYPE: HTMLInputTypeAttribute[] = ["date", "text", "number"];
 const SERVICE_OPTIONS = [
@@ -41,8 +42,30 @@ export const FormRegister = () => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<RegisterInputs>({ resolver: yupResolver(RegisterSchema) });
+
+  const watchZipCode = watch("zipCode");
+
+  const zipCode = useMemo(() => {
+    const zipCodeRegex = /^\d{5}-\d{3}$/;
+
+    if (zipCodeRegex.test(watchZipCode)) return watchZipCode;
+    else return "";
+  }, [watchZipCode]);
+
+  const { data: addressData } = useGetAddressByZipCode(zipCode);
+
+  useEffect(() => {
+    const response = addressData?.data;
+    if (response?.logradouro) {
+      setValue(
+        "address",
+        `${response.logradouro}, ${response.bairro} - ${response.localidade}/${response.uf}`
+      );
+    }
+  }, [addressData]);
 
   const onSubmit: SubmitHandler<RegisterInputs> = (data) => console.log(data);
 
