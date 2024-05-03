@@ -1,10 +1,16 @@
 import { HTMLInputTypeAttribute } from "react";
 import { RegisterInputs } from "./schema";
+import { maskCPF } from "@/utils/maskCPF";
+import { maskPhone } from "@/utils/maskPhone";
+import { maskZipCode } from "@/utils/maskZipCode";
+import { maskNumber } from "@/utils/maskNumber";
+import { maskCurrency } from "@/utils/maskCurrency";
 
 export interface IFieldsList {
   name: keyof RegisterInputs;
   label: string;
   type: HTMLInputTypeAttribute | "select";
+  mask?: (value: string) => string;
 }
 
 export const fieldsList: IFieldsList[] = [
@@ -27,6 +33,7 @@ export const fieldsList: IFieldsList[] = [
     name: "cpf",
     label: "CPF",
     type: "text",
+    mask: maskCPF,
   },
   {
     name: "rg",
@@ -43,16 +50,19 @@ export const fieldsList: IFieldsList[] = [
     name: "phone",
     label: "Telefone",
     type: "text",
+    mask: maskPhone,
   },
   {
     name: "zipCode",
     label: "CEP",
     type: "text",
+    mask: maskZipCode,
   },
   {
     name: "addressNumber",
     label: "Número",
     type: "text",
+    mask: maskNumber,
   },
   {
     name: "addressComplement",
@@ -83,7 +93,8 @@ export const fieldsList: IFieldsList[] = [
   {
     name: "consultationValue",
     label: "Valor da consulta (R$/h)",
-    type: "number",
+    type: "text",
+    mask: maskCurrency,
   },
   {
     name: "serviceRegion",

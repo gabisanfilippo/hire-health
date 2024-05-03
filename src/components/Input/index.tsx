@@ -10,6 +10,7 @@ type IProps = {
   name: string;
   label?: string;
   className?: string;
+  mask?: (value: string) => string;
 };
 
 export const Input = ({
@@ -20,7 +21,24 @@ export const Input = ({
   name,
   label,
   className,
+  mask,
 }: IProps) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    let formattedValue = value;
+
+    if (mask) {
+      formattedValue = mask(value);
+    }
+
+    if (onChange) {
+      onChange({
+        ...event,
+        target: { ...event.target, value: formattedValue },
+      });
+    }
+  };
+
   return (
     <div className={`flex flex-col ${className}`}>
       <label
@@ -38,7 +56,7 @@ export const Input = ({
           errorMessage ? "border-custom-pink" : "border-gray-400"
         } rounded-lg px-4 py-2 bg-white focus:border-custom-blue outline-none`}
         {...register}
-        onChange={onChange}
+        onChange={handleChange}
       />
       <span className="min-h-6 text-custom-pink font-semibold">
         {errorMessage}

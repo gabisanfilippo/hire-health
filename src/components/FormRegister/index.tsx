@@ -52,6 +52,7 @@ export const FormRegister = () => {
     type: field.type,
     errorMessage: errors[field.name]?.message?.toString(),
     className: GRID_CLASS_NAMES[field.name],
+    mask: field.mask,
   });
 
   return (
