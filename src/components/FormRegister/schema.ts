@@ -6,8 +6,8 @@ export type RegisterInputs = {
   birth: string;
   cpf: string;
   rg: string;
-  email: string;
-  phone: string;
+  email?: string;
+  phone?: string;
   zipCode: string;
   address: string;
   addressNumber: string;
@@ -19,21 +19,79 @@ export type RegisterInputs = {
   consultationValue: string;
 };
 
-export const RegisterSchema = Yup.object().shape({
-  photo: Yup.mixed<File>().required("*Este campo é obrigatório"),
-  name: Yup.string().required("*Este campo é obrigatório"),
-  birth: Yup.string().required("*Este campo é obrigatório"),
-  cpf: Yup.string().required("*Este campo é obrigatório"),
-  rg: Yup.string().required("*Este campo é obrigatório"),
-  email: Yup.string().required("*Este campo é obrigatório"),
-  phone: Yup.string().required("*Este campo é obrigatório"),
-  zipCode: Yup.string().required("*Este campo é obrigatório"),
-  address: Yup.string().required("*Este campo é obrigatório"),
-  addressNumber: Yup.string().required("*Este campo é obrigatório"),
-  addressComplement: Yup.string(),
-  specialty: Yup.string().required("*Este campo é obrigatório"),
-  specialtyRegistration: Yup.string().required("*Este campo é obrigatório"),
-  serviceOption: Yup.string().required("*Este campo é obrigatório"),
-  serviceRegion: Yup.string().required("*Este campo é obrigatório"),
-  consultationValue: Yup.string().required("*Este campo é obrigatório"),
+const stringMinRequiredSchema = Yup.string()
+  .required("*Este campo é obrigatório")
+  .min(3, "*Mínimo 3 caracteres");
+
+const stringRequiredSchema = Yup.string().required("*Este campo é obrigatório");
+
+const cpfSchema = Yup.string()
+  .required("*Este campo é obrigatório")
+  .test("is-valid-cpf", "*CPF inválido", (value) => {
+    if (!value) return false;
+    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    return cpfRegex.test(value);
+  });
+
+const emailSchema = Yup.string().when(["phone"], {
+  is: (phone: any) => !phone,
+  then: (schema) =>
+    schema
+      .required("*E-mail ou telefone é obrigatório")
+      .email("*E-mail inválido"),
 });
+
+const phoneSchema = Yup.string().when(["email"], {
+  is: (email: any) => !email,
+  then: (schema) =>
+    schema
+      .required("*E-mail ou telefone é obrigatório")
+      .test("is-valid-phone", "*Telefone inválido", (value) => {
+        const phoneRegex = /^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/;
+        return phoneRegex.test(value);
+      }),
+});
+
+const zipCodeSchema = Yup.string()
+  .required("*Este campo é obrigatório")
+  .test("is-valid-cep", "*CEP inválido", (value) => {
+    const cepRegex = /^\d{5}-\d{3}$/;
+    return cepRegex.test(value);
+  });
+
+const consultationValueSchema = Yup.string()
+  .required("*Este campo é obrigatório")
+  .matches(/[0-9]/, "*Valor inválido");
+
+const photoSchema = Yup.mixed<File>()
+  .required("*Este campo é obrigatório")
+  .test("is-image", "*Por favor, selecione um arquivo de imagem", (value) => {
+    if (value) {
+      const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
+      const fileExtension = value?.name?.split(".")?.pop()?.toLowerCase();
+      return allowedExtensions.includes(fileExtension ?? "");
+    }
+    return false;
+  });
+
+export const RegisterSchema = Yup.object().shape(
+  {
+    photo: photoSchema,
+    name: stringMinRequiredSchema,
+    birth: stringRequiredSchema,
+    cpf: cpfSchema,
+    rg: stringRequiredSchema,
+    email: emailSchema,
+    phone: phoneSchema,
+    zipCode: zipCodeSchema,
+    address: stringMinRequiredSchema,
+    addressNumber: stringRequiredSchema,
+    addressComplement: Yup.string(),
+    specialty: stringMinRequiredSchema,
+    specialtyRegistration: stringMinRequiredSchema,
+    serviceOption: stringRequiredSchema,
+    serviceRegion: stringMinRequiredSchema,
+    consultationValue: consultationValueSchema,
+  },
+  [["email", "phone"]]
+);
