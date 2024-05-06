@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { usePutCandidate } from "@/hooks/HireHealth/usePutCandidate";
 import { Candidate } from "@/types/hireHealth";
 import { IFieldsList } from "@/types/registerForm";
+import { AxiosError } from "axios";
 
 interface IProps {
   defaultValues?: Candidate;
@@ -56,6 +57,7 @@ export const FormRegister = ({ defaultValues }: IProps) => {
     register,
     handleSubmit,
     setValue,
+    setError,
     watch,
     formState: { errors },
   } = useForm<Candidate>({
@@ -85,7 +87,11 @@ export const FormRegister = ({ defaultValues }: IProps) => {
   } = usePutCandidate();
 
   const onSubmit: SubmitHandler<Candidate> = (data) => {
-    if (!defaultValues) postCandidate(data);
+    if (!defaultValues)
+      postCandidate(data).catch((error: AxiosError) => {
+        if (error.response?.data === "CPF already registered.")
+          setError("cpf", { message: "*Este CPF já está registrado." });
+      });
     else putCandidate(data);
   };
 
