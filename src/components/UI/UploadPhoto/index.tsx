@@ -69,7 +69,7 @@ export const UploadPhoto = ({
             />
           )}
         </article>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full max-w-full overflow-hidden">
           <p
             className={`${
               errorMessage ? "text-custom-pink" : "text-custom-blue"
@@ -81,7 +81,7 @@ export const UploadPhoto = ({
             htmlFor={name}
             className={`border-2 ${
               errorMessage ? "border-custom-pink" : "border-gray-400"
-            } rounded-lg px-4 py-2 bg-white focus:border-custom-blue outline-none font-semibold mb-6`}
+            } rounded-lg px-4 py-2 bg-white focus:border-custom-blue outline-none font-semibold mb-6 truncate ...`}
           >
             {file?.name || "Escolher arquivo"}
           </label>
