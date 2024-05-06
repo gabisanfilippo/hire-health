@@ -48,7 +48,7 @@ const GRID_CLASS_NAMES: Record<keyof Candidate, string> = {
 };
 
 export const FormRegister = ({ defaultValues }: IProps) => {
-  if (!defaultValues) fieldsList.shift();
+  if (!defaultValues && fieldsList[0].name === "status") fieldsList.shift();
 
   const router = useRouter();
 
