@@ -15,6 +15,10 @@ import { usePostCandidate } from "@/hooks/HireHealth/usePostCandidate";
 import { IconSuccess } from "@/assets/icons";
 import { useRouter } from "next/navigation";
 
+interface IProps {
+  defaultValues?: RegisterInputs;
+}
+
 const INPUT_TYPE: HTMLInputTypeAttribute[] = ["date", "text", "number"];
 const SERVICE_OPTIONS = [
   { label: "Selecione", value: "" },
@@ -40,7 +44,7 @@ const GRID_CLASS_NAMES: Record<keyof RegisterInputs, string> = {
   zipCode: "md:col-span-1 col-span-2",
 };
 
-export const FormRegister = () => {
+export const FormRegister = ({ defaultValues }: IProps) => {
   const router = useRouter();
 
   const {
@@ -49,7 +53,10 @@ export const FormRegister = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<RegisterInputs>({ resolver: yupResolver(RegisterSchema) });
+  } = useForm<RegisterInputs>({
+    resolver: yupResolver(RegisterSchema),
+    defaultValues,
+  });
 
   const watchZipCode = watch("zipCode");
 
@@ -67,7 +74,10 @@ export const FormRegister = () => {
     isSuccess,
   } = usePostCandidate();
 
-  const onSubmit: SubmitHandler<RegisterInputs> = (data) => postCandidate(data);
+  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
+    if (!defaultValues) postCandidate(data);
+    console.log(data);
+  };
 
   const commomProps = (field: IFieldsList) => ({
     name: field.name,
