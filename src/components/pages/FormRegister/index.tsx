@@ -11,6 +11,9 @@ import { UploadPhoto } from "../../UI/UploadPhoto";
 import { Select } from "../../UI/Select";
 import { IFieldsList, RegisterInputs } from "@/types/registerForm";
 import { useGetAddressByZipCode } from "@/hooks/ViaCep/useGetAddressByZipCode";
+import { usePostCandidate } from "@/hooks/HireHealth/usePostCandidate";
+import { IconSuccess } from "@/assets/icons";
+import { useRouter } from "next/navigation";
 
 const INPUT_TYPE: HTMLInputTypeAttribute[] = ["date", "text", "number"];
 const SERVICE_OPTIONS = [
@@ -38,6 +41,8 @@ const GRID_CLASS_NAMES: Record<keyof RegisterInputs, string> = {
 };
 
 export const FormRegister = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -56,6 +61,23 @@ export const FormRegister = () => {
   }, [watchZipCode]);
 
   const { data: addressData } = useGetAddressByZipCode(zipCode);
+  const {
+    mutateAsync: postCandidate,
+    isPending,
+    isSuccess,
+  } = usePostCandidate();
+
+  const onSubmit: SubmitHandler<RegisterInputs> = (data) => postCandidate(data);
+
+  const commomProps = (field: IFieldsList) => ({
+    name: field.name,
+    label: field.label,
+    register: { ...register(field.name) },
+    type: field.type,
+    errorMessage: errors[field.name]?.message?.toString(),
+    className: GRID_CLASS_NAMES[field.name],
+    mask: field.mask,
+  });
 
   useEffect(() => {
     const response = addressData?.data;
@@ -67,17 +89,22 @@ export const FormRegister = () => {
     }
   }, [addressData]);
 
-  const onSubmit: SubmitHandler<RegisterInputs> = (data) => console.log(data);
+  useEffect(() => {
+    isSuccess && setTimeout(() => router.push("/"), 2000);
+  }, [isSuccess]);
 
-  const commomProps = (field: IFieldsList) => ({
-    name: field.name,
-    label: field.label,
-    register: { ...register(field.name) },
-    type: field.type,
-    errorMessage: errors[field.name]?.message?.toString(),
-    className: GRID_CLASS_NAMES[field.name],
-    mask: field.mask,
-  });
+  if (isSuccess)
+    return (
+      <section className="flex items-center justify-center flex-col p-8 mt-8">
+        <IconSuccess />
+        <p className="text-center mt-8 font-semibold text-lg">
+          Cadastro realizado com sucesso!
+        </p>
+        <p className="text-center">
+          Você será redirecionado em alguns instantes.
+        </p>
+      </section>
+    );
 
   return (
     <form
@@ -118,6 +145,7 @@ export const FormRegister = () => {
         type="submit"
         content={"Enviar"}
         className={"col-span-4 w-max m-auto px-8 text-lg mt-4"}
+        isLoading={isPending}
       />
     </form>
   );
