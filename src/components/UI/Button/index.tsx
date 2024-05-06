@@ -20,7 +20,7 @@ export const Button = ({
 }: IProps) => {
   return (
     <button
-      className={`bg-custom-pink px-4 py-2 rounded-lg text-white font-medium transition-all flex items-center ${
+      className={`bg-custom-pink px-4 py-2 rounded-lg text-white font-medium transition-all flex items-center justify-center gap-2  ${
         isLoading || isDisabled
           ? "opacity-50 hover:opacity-50"
           : "opacity-100 hover:opacity-100"
