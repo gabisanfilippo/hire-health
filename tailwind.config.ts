@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         "custom-blue": "#4392F9",
         "custom-pink": "#F83758",
+        "custom-white": "#FDFDFD",
       },
     },
   },
