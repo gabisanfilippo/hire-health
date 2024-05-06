@@ -32,8 +32,8 @@ export const IconLogo = () => {
           y2="7.75634"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#CFE2FC" />
-          <stop offset="1" stop-color="#4392F9" />
+          <stop stopColor="#CFE2FC" />
+          <stop offset="1" stopColor="#4392F9" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_1_7350"
@@ -43,8 +43,8 @@ export const IconLogo = () => {
           y2="23.2681"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F8BCC6" />
-          <stop offset="1" stop-color="#F83758" />
+          <stop stopColor="#F8BCC6" />
+          <stop offset="1" stopColor="#F83758" />
         </linearGradient>
       </defs>
     </svg>
