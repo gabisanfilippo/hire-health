@@ -73,6 +73,7 @@ export const RegisterSchema = Yup.object().shape(
     serviceOption: stringRequiredSchema,
     serviceRegion: stringMinRequiredSchema,
     consultationValue: consultationValueSchema,
+    status: Yup.string(),
   },
   [["email", "phone"]]
 );

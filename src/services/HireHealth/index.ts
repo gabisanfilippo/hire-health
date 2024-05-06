@@ -1,5 +1,4 @@
 import { Candidate, IHireHealthApiClass } from "@/types/hireHealth";
-import { RegisterInputs } from "@/types/registerForm";
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 class HireHealthApiClass implements IHireHealthApiClass {
@@ -14,9 +13,16 @@ class HireHealthApiClass implements IHireHealthApiClass {
   }
 
   public async postCandidate(
-    body: RegisterInputs
+    body: Candidate
   ): Promise<AxiosResponse<Candidate, any>> {
     const response = this.api.post(`candidates`, body);
+    return response;
+  }
+
+  public async putCandidate(
+    body: Candidate
+  ): Promise<AxiosResponse<Candidate, any>> {
+    const response = this.api.put(`candidates`, body);
     return response;
   }
 }

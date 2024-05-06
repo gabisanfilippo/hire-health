@@ -7,6 +7,11 @@ import { maskCurrency } from "@/utils/maskCurrency";
 
 export const fieldsList: IFieldsList[] = [
   {
+    name: "status",
+    label: "Status",
+    type: "children",
+  },
+  {
     name: "photo",
     label: "Foto",
     type: "file",

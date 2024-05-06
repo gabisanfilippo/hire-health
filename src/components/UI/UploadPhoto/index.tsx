@@ -1,17 +1,25 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import { RegisterInputs } from "@/types/registerForm";
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { IconProfile } from "@/assets/icons";
+import { Candidate } from "@/types/hireHealth";
+import { Select } from "../Select";
 
 interface IProps {
   errorMessage?: string;
   className?: string;
   name: string;
   label?: string;
-  register?: UseFormRegisterReturn<keyof RegisterInputs>;
+  register?: UseFormRegisterReturn<keyof Candidate>;
   onChange: (file: FileList) => void;
+  propsStatus?: any;
 }
+
+const STATUS_OPTIONS = [
+  { label: "Selecione", value: "" },
+  { label: "Ativo", value: "active" },
+  { label: "Inativo", value: "inactive" },
+];
 
 export const UploadPhoto = ({
   errorMessage,
@@ -20,6 +28,7 @@ export const UploadPhoto = ({
   label,
   register,
   onChange,
+  propsStatus,
 }: IProps) => {
   const [file, setFile] = useState<File | undefined>();
   const [imageUrl, setImageUrl] = useState<string | undefined>();
@@ -72,9 +81,9 @@ export const UploadPhoto = ({
             htmlFor={name}
             className={`border-2 ${
               errorMessage ? "border-custom-pink" : "border-gray-400"
-            } rounded-lg px-4 py-2 bg-white focus:border-custom-blue outline-none font-semibold`}
+            } rounded-lg px-4 py-2 bg-white focus:border-custom-blue outline-none font-semibold mb-6`}
           >
-            Escolher arquivo
+            {file?.name || "Escolher arquivo"}
           </label>
           <input
             type="file"
@@ -84,7 +93,7 @@ export const UploadPhoto = ({
             {...register}
             onChange={handleChange}
           />
-          <p className="mt-4">{file?.name}</p>
+          {propsStatus && <Select {...propsStatus} options={STATUS_OPTIONS} />}
         </div>
       </div>
       <span className="h-6 text-custom-pink font-semibold">{errorMessage}</span>
