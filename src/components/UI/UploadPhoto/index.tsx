@@ -16,7 +16,6 @@ interface IProps {
 }
 
 const STATUS_OPTIONS = [
-  { label: "Selecione", value: "" },
   { label: "Ativo", value: "active" },
   { label: "Inativo", value: "inactive" },
 ];

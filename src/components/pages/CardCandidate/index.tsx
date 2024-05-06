@@ -18,7 +18,6 @@ export const CardCandidate = ({ data }: IProps) => {
     ...data,
     consultationValue: "R$ " + data.consultationValue,
   };
-  delete defaultValues.status;
 
   return (
     <>
