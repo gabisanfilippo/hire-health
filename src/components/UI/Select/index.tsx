@@ -1,9 +1,9 @@
-import { RegisterInputs } from "@/types/registerForm";
+import { Candidate } from "@/types/hireHealth";
 import { ChangeEvent } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 type IProps = {
-  register?: UseFormRegisterReturn<keyof RegisterInputs>;
+  register?: UseFormRegisterReturn<keyof Candidate>;
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
   errorMessage?: string;
   name: string;
