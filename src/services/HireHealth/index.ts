@@ -25,6 +25,13 @@ class HireHealthApiClass implements IHireHealthApiClass {
     const response = this.api.put(`candidates`, body);
     return response;
   }
+
+  public async deleteCandidate(
+    cpf: string
+  ): Promise<AxiosResponse<Candidate[], any>> {
+    const response = this.api.delete(`candidates/${cpf}`);
+    return response;
+  }
 }
 
 export const ApiHireHealth = new HireHealthApiClass();

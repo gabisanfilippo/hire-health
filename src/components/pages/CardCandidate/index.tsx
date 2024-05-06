@@ -3,6 +3,7 @@ import { Modal } from "@/components/UI/Modal";
 import { Candidate } from "@/types/hireHealth";
 import { useState } from "react";
 import { FormRegister } from "../FormRegister";
+import { DeleteConfirmation } from "../DeleteConfirmation";
 
 interface IProps {
   data: Candidate;
@@ -66,6 +67,21 @@ export const CardCandidate = ({ data }: IProps) => {
           onClose={() => setModalIsOpen((prev) => ({ ...prev, edit: false }))}
           title="Editar candidato"
           content={<FormRegister defaultValues={defaultValues} />}
+        />
+      )}
+
+      {modalIsOpen.delete && (
+        <Modal
+          onClose={() => setModalIsOpen((prev) => ({ ...prev, delete: false }))}
+          title="Excluir candidato"
+          content={
+            <DeleteConfirmation
+              onClose={() =>
+                setModalIsOpen((prev) => ({ ...prev, delete: false }))
+              }
+              cpf={data.cpf}
+            />
+          }
         />
       )}
     </>
