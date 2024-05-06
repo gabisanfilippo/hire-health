@@ -25,7 +25,7 @@ export let mockCandidates: Candidate[] = [
     photo: new File([], "https://via.placeholder.com/150"),
     name: "Maria Santos",
     birth: "1985-08-20",
-    cpf: "987.654.321-00",
+    cpf: "987.654.321-10",
     rg: "7654321",
     email: "maria@example.com",
     phone: "(11) 98765-4321",
