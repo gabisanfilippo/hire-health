@@ -20,4 +20,7 @@ export type Candidate = {
 
 export interface IHireHealthApiClass {
   getCandidates: () => Promise<AxiosResponse<Candidate[], any>>;
+  postCandidate: (body: Candidate) => Promise<AxiosResponse<Candidate, any>>;
+  putCandidate: (body: Candidate) => Promise<AxiosResponse<Candidate, any>>;
+  deleteCandidate: (cpf: string) => Promise<AxiosResponse<Candidate[], any>>;
 }
