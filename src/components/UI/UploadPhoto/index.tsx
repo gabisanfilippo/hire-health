@@ -69,13 +69,7 @@ export const UploadPhoto = ({
           )}
         </article>
         <div className="flex flex-col w-full max-w-full overflow-hidden">
-          <p
-            className={`${
-              errorMessage ? "text-custom-pink" : "text-custom-blue"
-            } text-sm font-semibold`}
-          >
-            {label}
-          </p>
+          <p className={`text-custom-blue text-sm font-semibold`}>{label}</p>
           <label
             htmlFor={name}
             className={`border-2 ${

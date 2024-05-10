@@ -25,9 +25,7 @@ export const Select = ({
     <div className={`flex flex-col ${className}`}>
       <label
         htmlFor={name}
-        className={`${
-          errorMessage ? "text-custom-pink" : "text-custom-blue"
-        } text-sm font-semibold`}
+        className={`text-custom-blue text-sm font-semibold`}
       >
         {label}
       </label>
