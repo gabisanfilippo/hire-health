@@ -49,7 +49,8 @@ const GRID_CLASS_NAMES: Record<keyof Candidate, string> = {
 };
 
 export const FormRegister = ({ defaultValues }: IProps) => {
-  if (!defaultValues && fieldsList[0].name === "status") fieldsList.shift();
+  let fields = [...fieldsList];
+  if (!defaultValues) fields.shift();
 
   const router = useRouter();
 
@@ -138,14 +139,14 @@ export const FormRegister = ({ defaultValues }: IProps) => {
       className="grid grid-cols-4 gap-4 gap-y-0"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {fieldsList.map((field) => {
+      {fields.map((field) => {
         if (field.type === "file") {
           return (
             <UploadPhoto
               key={"field" + field.name}
               {...commomProps(field)}
               onChange={(file) => setValue(field.name, file[0])}
-              propsStatus={defaultValues && commomProps(fieldsList[0])}
+              propsStatus={defaultValues && commomProps(fields[0])}
             />
           );
         }
