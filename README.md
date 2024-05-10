@@ -8,9 +8,6 @@ A web application for registering candidates for Hire Health, built with ReactJS
 - [Technologies Used](#technologies-used)
 - [Features](#features)
 - [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## About
 
