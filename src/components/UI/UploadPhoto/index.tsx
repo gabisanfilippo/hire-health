@@ -85,6 +85,7 @@ export const UploadPhoto = ({
             className="hidden"
             {...register}
             onChange={handleChange}
+            accept="image/*"
           />
           {propsStatus && <Select {...propsStatus} options={STATUS_OPTIONS} />}
         </div>
