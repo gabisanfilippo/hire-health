@@ -67,6 +67,7 @@ export const CardCandidate = ({ data }: IProps) => {
           onClose={() => setModalIsOpen((prev) => ({ ...prev, edit: false }))}
           title="Editar candidato"
           content={<FormRegister defaultValues={defaultValues} />}
+          className="max-w-5xl"
         />
       )}
 
