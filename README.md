@@ -8,6 +8,8 @@ A web application for registering candidates for Hire Health, built with ReactJS
 - [Technologies Used](#technologies-used)
 - [Features](#features)
 - [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Contributing](#contributing)
 
 ## About
 
@@ -46,3 +48,15 @@ npm install
 # Start the development server
 npm run dev
 ```
+
+## Usage
+
+Once the development server is running, open your web browser and navigate to http://localhost:3000 to access the application. Enter the required candidate information into the form fields and submit the form to register a new candidate.
+
+## Contributing
+
+If you would like to contribute to Hire Health Registration Form, please follow these guidelines:
+
+- Fork the repository and create a new branch for your feature or bug fix.
+- Make your changes and ensure that they are properly tested.
+- Submit a pull request with a clear description of your changes and their purpose.
